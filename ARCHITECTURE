@@ -1,0 +1,17 @@
+ARCHITECTURE TO UNDERSTAND THE PROJECT BUILDUNG
+
+quiz-generator/
+│
+├── backend/               # Django backend
+│   ├── manage.py
+│   ├── quiz_app/          # Django app (courses, questions, quizzes)
+│   ├── users/             # Authentication app
+│   ├── settings.py
+│   └── ...
+│
+├── frontend/              # React frontend
+│   ├── src/
+│   ├── package.json
+│   └── ...
+│
+└── README.md
