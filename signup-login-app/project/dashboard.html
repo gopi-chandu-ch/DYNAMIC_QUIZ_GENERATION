@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academix - Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #00c6ff 0%, #007a5c 100%);
+      min-height: 100vh;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .nav-links button {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links button:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .dashboard {
+      background: rgba(255, 255, 255, 0.9);
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 900px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #007a5c;
+    }
+
+    .profile-info {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .profile-info p {
+      margin: 0.3rem 0;
+      font-size: 1rem;
+    }
+
+    .courses-section {
+      margin-top: 1rem;
+    }
+
+    .courses-section h3 {
+      color: #007a5c;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid #00c6ff;
+      display: inline-block;
+      padding-bottom: 0.3rem;
+    }
+
+    .course-list, .enrolled-list {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .course-card {
+      background: white;
+      border-radius: 15px;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .course-card h4 {
+      margin: 0 0 0.5rem;
+      color: #007a5c;
+    }
+
+    .course-card p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .course-card button {
+      background: linear-gradient(135deg, #00c6ff 0%, #007a5c 100%);
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 0.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .course-card button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 198, 255, 0.5);
+    }
+
+    .empty {
+      text-align: center;
+      color: #777;
+      font-style: italic;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">ACADEMIX</div>
+    <div class="nav-links">
+      <button id="profileBtn">Profile</button>
+      <button id="progressBtn">Progress</button>
+      <button id="settingsBtn">Settings</button>
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </nav>
+
+  <div class="dashboard">
+    <h2>Welcome to Your Dashboard</h2>
+
+    <div class="profile-info">
+      <p><strong>Name:</strong> <span id="userName"></span></p>
+      <p><strong>Email:</strong> <span id="userEmail"></span></p>
+    </div>
+
+    <div class="courses-section">
+      <h3>Available Courses</h3>
+      <div class="course-list" id="availableCourses"></div>
+    </div>
+
+    <div class="courses-section">
+      <h3>My Enrolled Courses</h3>
+      <div class="enrolled-list" id="enrolledCourses"></div>
+    </div>
+  </div>
+
+  <script>
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    if (!loggedInUser) {
+      alert("Please log in first.");
+      window.location.href = "login.html";
+    }
+
+    document.getElementById("userName").textContent = loggedInUser.name || "Unknown User";
+    document.getElementById("userEmail").textContent = loggedInUser.email;
+
+    const availableCourses = [
+      { title: "Introduction to AI", desc: "Learn AI basics and applications." },
+      { title: "Web Development", desc: "HTML, CSS, and JavaScript for beginners." },
+      { title: "Data Science", desc: "Data analysis, Python, and ML fundamentals." },
+      { title: "Cybersecurity", desc: "Protect systems and networks effectively." },
+      { title: "Cloud Computing", desc: "AWS, Azure, and cloud deployment models." }
+    ];
+
+    const availableDiv = document.getElementById("availableCourses");
+    const enrolledDiv = document.getElementById("enrolledCourses");
+
+    const userIndex = users.findIndex(u => u.email === loggedInUser.email);
+    const enrolledCourses = users[userIndex]?.enrolled || [];
+
+    function renderCourses() {
+      availableDiv.innerHTML = "";
+      availableCourses.forEach((course) => {
+        const isEnrolled = enrolledCourses.includes(course.title);
+        const card = document.createElement("div");
+        card.classList.add("course-card");
+        card.innerHTML = `
+          <h4>${course.title}</h4>
+          <p>${course.desc}</p>
+          <button ${isEnrolled ? "disabled" : ""}>
+            ${isEnrolled ? "Enrolled" : "Add Course"}
+          </button>
+        `;
+        card.querySelector("button").addEventListener("click", () => addCourse(course.title));
+        availableDiv.appendChild(card);
+      });
+
+      enrolledDiv.innerHTML = "";
+      if (enrolledCourses.length === 0) {
+        enrolledDiv.innerHTML = `<p class="empty">No courses enrolled yet.</p>`;
+      } else {
+        enrolledCourses.forEach(course => {
+          const card = document.createElement("div");
+          card.classList.add("course-card");
+          card.innerHTML = `<h4>${course}</h4><p>Status: <strong>In Progress</strong></p>`;
+          enrolledDiv.appendChild(card);
+        });
+      }
+    }
+
+    function addCourse(title) {
+      if (!enrolledCourses.includes(title)) {
+        enrolledCourses.push(title);
+        users[userIndex].enrolled = enrolledCourses;
+        localStorage.setItem("users", JSON.stringify(users));
+        localStorage.setItem("loggedInUser", JSON.stringify(users[userIndex]));
+        renderCourses();
+      }
+    }
+
+    document.getElementById("profileBtn").onclick = () => window.location.href = "profile.html";
+    document.getElementById("progressBtn").onclick = () => window.location.href = "progress.html";
+    document.getElementById("settingsBtn").onclick = () => window.location.href = "settings.html";
+    document.getElementById("logoutBtn").onclick = () => {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "login.html";
+    };
+
+    renderCourses();
+  </script>
+</body>
+</html>
