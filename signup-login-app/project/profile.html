@@ -32,6 +32,7 @@
             font-size: 1.5rem;
             font-weight: 700;
             letter-spacing: 1px;
+            cursor: pointer;
         }
 
         .nav-buttons {
@@ -49,6 +50,7 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
+            text-decoration: none;
         }
 
         .nav-btn:hover {
@@ -84,16 +86,11 @@
         }
 
         .section {
-            display: none;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 2rem;
+            padding: 3rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             backdrop-filter: blur(10px);
-        }
-
-        .section.active {
-            display: block;
             animation: fadeIn 0.4s ease;
         }
 
@@ -104,403 +101,239 @@
 
         h2 {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             color: #e0e7ff;
-            font-size: 2rem;
+            font-size: 2.2rem;
         }
 
-        .profile-details {
-            background: rgba(255, 255, 255, 0.1);
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2.5rem;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .profile-details p {
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
-            padding: 0.5rem;
-            border-left: 4px solid #a78bfa;
-        }
-
-        .profile-details strong {
-            color: #e0e7ff;
-        }
-
-        .courses-header {
+            padding: 2.5rem;
+            text-align: center;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            margin-bottom: 1.5rem;
-            margin-top: 2rem;
+            justify-content: center;
         }
 
-        .courses-header h3 {
-            font-size: 1.5rem;
-            color: #ddd6fe;
-        }
-
-        #addCourseBtn {
-            background: #0ea5e9;
-            color: white;
-            border: none;
-            padding: 0.7rem 1.3rem;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        #addCourseBtn:hover {
-            background: #0284c7;
-            transform: translateY(-2px);
-        }
-
-        .course-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .course-card {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 15px;
-            padding: 1.5rem;
-            color: #fff;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .course-card:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        .course-card h4 {
-            margin-bottom: 0.8rem;
-            font-size: 1.3rem;
-        }
-
-        .status {
-            font-weight: 600;
-            border-radius: 10px;
-            padding: 0.4rem 0.8rem;
-            display: inline-block;
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .completed { background: #10b981; }
-        .progress { background: #f59e0b; }
-        .notstarted { background: #ef4444; }
-
-        .progress-section {
-            display: grid;
-            gap: 2rem;
-        }
-
-        .progress-card {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 15px;
-            padding: 1.5rem;
-        }
-
-        .progress-card h3 {
-            margin-bottom: 1rem;
-            color: #ddd6fe;
-        }
-
-        .progress-bar-container {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            height: 30px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #0ea5e9, #10b981);
-            transition: width 0.5s ease;
+        .profile-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .stat-card h4 {
-            font-size: 2rem;
+        .profile-card h3 {
+            font-size: 1.8rem;
             margin-bottom: 0.5rem;
-            color: #a78bfa;
         }
 
-        .settings-section {
-            display: grid;
-            gap: 1.5rem;
+        .profile-card p {
+            color: #e0e7ff;
+            font-size: 1.1rem;
         }
 
-        .setting-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
+        .profile-details {
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 15px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .detail-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .setting-item h4 {
-            margin-bottom: 0.5rem;
-        }
-
-        .setting-item p {
-            color: #e0e7ff;
-            font-size: 0.9rem;
-        }
-
-        .toggle-btn {
-            background: #8b5cf6;
-            color: white;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
+            padding: 1.3rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #a78bfa;
             transition: all 0.3s ease;
         }
 
-        .toggle-btn:hover {
-            background: #7c3aed;
+        .detail-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #e0e7ff;
+            font-size: 1rem;
+        }
+
+        .detail-value {
+            font-size: 1rem;
+            color: #fff;
+            text-align: right;
+        }
+
+        .welcome-message {
+            text-align: center;
+            background: rgba(16, 185, 129, 0.2);
+            border: 2px solid #10b981;
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 900px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-avatar {
+                width: 150px;
+                height: 150px;
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-buttons {
+                flex-wrap: wrap;
+            }
+
+            .section {
+                padding: 2rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">Academix</div>
+        <div class="logo" onclick="window.location.reload()">Academix</div>
         <div class="nav-buttons">
-            <button class="nav-btn active" data-section="profile">Profile</button>
-            <button class="nav-btn" data-section="progress">Progress</button>
-            <button class="nav-btn" data-section="settings">Settings</button>
-            <button id="logoutBtn">Logout</button>
+            <a href="#" class="nav-btn active">Profile</a>
+                
+                <a href="mycourse.html" class="nav-btn"><span>My Courses</span></a>
+                <a href="progress.html" class="nav-btn"><span>Progress</span></a>
+                <a href="settings.html" class="nav-btn"><span>Settings</span></a>
+                <a href="logout.html" class="nav-btn"><span>Logout</span></a>
+               
+
+            
         </div>
     </nav>
 
     <div class="main-container">
-        <!-- Profile Section -->
-        <div id="profile" class="section active">
+        <div class="section">
+            <div class="welcome-message" id="welcomeMessage">
+                Welcome back! We're glad to see you.
+            </div>
+
             <h2>User Profile</h2>
-            <div class="profile-details">
-                <p><strong>Name:</strong> <span id="userName">John Doe</span></p>
-                <p><strong>Email:</strong> <span id="userEmail">john@example.com</span></p>
-                <p><strong>Student ID:</strong> <span id="studentId">STU-2024-001</span></p>
-                <p><strong>Joined:</strong> <span id="joinDate">January 2024</span></p>
-            </div>
-
-            <div class="courses-header">
-                <h3>My Courses</h3>
-                <button id="addCourseBtn">+ Add Course</button>
-            </div>
-            <div class="course-list" id="courseList"></div>
-        </div>
-
-        <!-- Progress Section -->
-        <div id="progress" class="section">
-            <h2>Learning Progress</h2>
-            <div class="progress-section">
-                <div class="progress-card">
-                    <h3>Overall Progress</h3>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" id="overallProgress" style="width: 55%">55%</div>
-                    </div>
-                    <p>You're doing great! Keep up the good work.</p>
+            
+            <div class="profile-grid">
+                <div class="profile-card">
+                    <div class="profile-avatar" id="avatar">JD</div>
+                    <h3 id="displayName">John Doe</h3>
+                    <p style="color: #e0e7ff; margin-top: 0.5rem;">Student</p>
                 </div>
 
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <h4 id="completedCount">1</h4>
-                        <p>Courses Completed</p>
+                <div class="profile-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Full Name</span>
+                        <span class="detail-value" id="userName">John Doe</span>
                     </div>
-                    <div class="stat-card">
-                        <h4 id="inProgressCount">1</h4>
-                        <p>In Progress</p>
+                    <div class="detail-item">
+                        <span class="detail-label">Email</span>
+                        <span class="detail-value" id="userEmail">john@example.com</span>
                     </div>
-                    <div class="stat-card">
-                        <h4 id="notStartedCount">1</h4>
-                        <p>Not Started</p>
+                    <div class="detail-item">
+                        <span class="detail-label">Student ID</span>
+                        <span class="detail-value" id="studentId">STU-2024-001</span>
                     </div>
-                    <div class="stat-card">
-                        <h4 id="totalCourses">3</h4>
-                        <p>Total Courses</p>
+                    <div class="detail-item">
+                        <span class="detail-label">Department</span>
+                        <span class="detail-value" id="department">Computer Science</span>
                     </div>
-                </div>
-
-                <div class="progress-card">
-                    <h3>Course-wise Progress</h3>
-                    <div id="courseProgress"></div>
-                </div>
-            </div>
-        </div>
-
-        
-        <div id="settings" class="section">
-            <h2>Settings</h2>
-            <div class="settings-section">
-                <div class="setting-item">
-                    <div>
-                        <h4>Email Notifications</h4>
-                        <p>Receive updates about your courses</p>
+                    <div class="detail-item">
+                        <span class="detail-label">Joined Date</span>
+                        <span class="detail-value" id="joinDate">January 2024</span>
                     </div>
-                    <button class="toggle-btn" onclick="alert('Notifications toggled!')">Enabled</button>
-                </div>
-                <div class="setting-item">
-                    <div>
-                        <h4>Dark Mode</h4>
-                        <p>Switch between light and dark theme</p>
-                    </div>
-                    <button class="toggle-btn" onclick="alert('Theme toggled!')">Toggle</button>
-                </div>
-                <div class="setting-item">
-                    <div>
-                        <h4>Language</h4>
-                        <p>Choose your preferred language</p>
-                    </div>
-                    <button class="toggle-btn" onclick="alert('Language settings opened!')">English</button>
-                </div>
-                <div class="setting-item">
-                    <div>
-                        <h4>Privacy</h4>
-                        <p>Manage your privacy settings</p>
-                    </div>
-                    <button class="toggle-btn" onclick="alert('Privacy settings opened!')">Manage</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        
-        const courses = [
-            { name: "Machine Learning", status: "Completed" },
-            { name: "Web Development", status: "In Progress" },
-            { name: "Data Science", status: "Not Started" }
-        ];
-
-        const navButtons = document.querySelectorAll('.nav-btn');
-        const sections = document.querySelectorAll('.section');
-
-        navButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const targetSection = btn.getAttribute('data-section');
-                
-                navButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                sections.forEach(s => s.classList.remove('active'));
-                document.getElementById(targetSection).classList.add('active');
-            });
-        });
-
-        function renderCourses() {
-            const courseList = document.getElementById("courseList");
-            courseList.innerHTML = "";
+        // Load user data from login
+        function loadUserData() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
             
-            courses.forEach(course => {
-                const card = document.createElement("div");
-                card.classList.add("course-card");
+            if (currentUser) {
+                // Update profile information
+                document.getElementById('userName').textContent = currentUser.name;
+                document.getElementById('displayName').textContent = currentUser.name;
+                document.getElementById('userEmail').textContent = currentUser.email;
+                document.getElementById('studentId').textContent = currentUser.studentId;
+                document.getElementById('department').textContent = currentUser.department;
+                document.getElementById('joinDate').textContent = currentUser.joinDate;
 
-                let statusClass = "";
-                if (course.status === "Completed") statusClass = "completed";
-                else if (course.status === "In Progress") statusClass = "progress";
-                else statusClass = "notstarted";
+                // Update avatar with initials
+                const initials = currentUser.name
+                    .split(' ')
+                    .map(n => n[0])
+                    .join('')
+                    .toUpperCase();
+                document.getElementById('avatar').textContent = initials;
 
-                card.innerHTML = `
-                    <h4>${course.name}</h4>
-                    <span class="status ${statusClass}">${course.status}</span>
-                `;
-                courseList.appendChild(card);
-            });
-
-            updateStats();
-            updateCourseProgress();
+                // Update welcome message
+                document.getElementById('welcomeMessage').textContent = 
+                    `Welcome back, ${currentUser.name.split(' ')[0]}! We're glad to see you.`;
+            }
         }
 
-     
-        function updateStats() {
-            const completed = courses.filter(c => c.status === "Completed").length;
-            const inProgress = courses.filter(c => c.status === "In Progress").length;
-            const notStarted = courses.filter(c => c.status === "Not Started").length;
-            const total = courses.length;
-
-            document.getElementById('completedCount').textContent = completed;
-            document.getElementById('inProgressCount').textContent = inProgress;
-            document.getElementById('notStartedCount').textContent = notStarted;
-            document.getElementById('totalCourses').textContent = total;
-
-            const overallPercentage = total > 0 ? Math.round((completed / total) * 100) : 0;
-            const progressBar = document.getElementById('overallProgress');
-            progressBar.style.width = overallPercentage + '%';
-            progressBar.textContent = overallPercentage + '%';
+        function navigateToCourses(e) {
+            e.preventDefault();
+            alert('Navigate to My Courses page (open courses.html)');
+            // In real app: window.location.href = 'courses.html';
         }
 
-        function updateCourseProgress() {
-            const container = document.getElementById('courseProgress');
-            container.innerHTML = '';
-
-            courses.forEach(course => {
-                let percentage = 0;
-                if (course.status === "Completed") percentage = 100;
-                else if (course.status === "In Progress") percentage = 50;
-
-                const progressHTML = `
-                    <div style="margin-bottom: 1.5rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span>${course.name}</span>
-                            <span>${percentage}%</span>
-                        </div>
-                        <div class="progress-bar-container" style="height: 20px;">
-                            <div class="progress-bar" style="width: ${percentage}%"></div>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += progressHTML;
-            });
+        function navigateToProgress(e) {
+            e.preventDefault();
+            alert('Navigate to Progress page');
         }
 
-        document.getElementById('addCourseBtn').addEventListener('click', () => {
-            const name = prompt("Enter course name:");
-            if (!name) return alert("Course name cannot be empty!");
-            
-            const status = prompt("Enter status (Completed / In Progress / Not Started):");
-            if (!status) return alert("Please enter a course status!");
-            
-            courses.push({ name, status });
-            renderCourses();
-        });
+        function navigateToSettings(e) {
+            e.preventDefault();
+            alert('Navigate to Settings page');
+        }
 
         document.getElementById('logoutBtn').addEventListener('click', () => {
             if (confirm("Are you sure you want to logout?")) {
+                localStorage.removeItem('currentUser');
                 alert("Logged out successfully!");
-                window.location.href = "login.html";
+                // In real app: window.location.href = 'login.html';
             }
         });
 
-        renderCourses();
+        // Load data on page load
+        loadUserData();
     </script>
 
 </body>

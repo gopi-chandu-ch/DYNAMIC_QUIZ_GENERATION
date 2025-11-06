@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Academix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0af3a5 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+
+        nav {
+            background: rgba(255, 255, 255, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: #0891b2;
+            border-color: #0891b2;
+        }
+
+        #logoutBtn {
+            background: #ff6b6b;
+            border: none;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header-section h2 {
+            font-size: 2.2rem;
+            color: #e0e7ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-section p {
+            color: #e0e7ff;
+            font-size: 1rem;
+        }
+
+        .settings-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .settings-category {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .category-icon {
+            font-size: 2rem;
+        }
+
+        .category-header h3 {
+            font-size: 1.5rem;
+            color: #ddd6fe;
+        }
+
+        .settings-section {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .setting-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .setting-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .setting-info h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .setting-info p {
+            color: #e0e7ff;
+            font-size: 0.9rem;
+        }
+
+        .toggle-btn {
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.3rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 100px;
+        }
+
+        .toggle-btn:hover {
+            background: #7c3aed;
+            transform: scale(1.05);
+        }
+
+        .toggle-btn.active {
+            background: #10b981;
+        }
+
+        .toggle-btn.inactive {
+            background: #6b7280;
+        }
+
+        .danger-btn {
+            background: #ef4444;
+        }
+
+        .danger-btn:hover {
+            background: #dc2626;
+        }
+
+        .select-input {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            min-width: 120px;
+        }
+
+        .select-input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        .select-input option {
+            background: #667eea;
+            color: white;
+        }
+
+        .account-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .account-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .account-card h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .account-card p {
+            color: #e0e7ff;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .account-btn {
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.3rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .account-btn:hover {
+            background: #0284c7;
+        }
+
+        @media (max-width: 768px) {
+            .nav-buttons {
+                flex-wrap: wrap;
+            }
+
+            .setting-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .toggle-btn, .select-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Academix</div>
+        <div class="nav-buttons">
+           <a href="profile.html" class="nav-btn"><span>Profile</span></a>
+            <a href="mycourse.html" class="nav-btn"><span>My Course</span></a>
+            <a href="progress.html" class="nav-btn"><span>Progress</span></a>
+            <a href="#" class="nav-btn active">Settings</a>
+            <a href="logout.html" class="nav-btn"><span>Logout</span></a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="header-section">
+            <h2>Settings</h2>
+            <p>Manage your preferences and account settings</p>
+        </div>
+
+        <div class="settings-grid">
+            <!-- Notifications Settings -->
+            <div class="settings-category">
+                <div class="category-header">
+                    <span class="category-icon">🔔</span>
+                    <h3>Notifications</h3>
+                </div>
+                <div class="settings-section">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h4>Email Notifications</h4>
+                            <p>Receive updates about your courses via email</p>
+                        </div>
+                        <button class="toggle-btn active" id="emailNotif" onclick="toggleButton(this)">Enabled</button>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h4>Push Notifications</h4>
+                            <p>Get real-time notifications on your device</p>
+                        </div>
+                        <button class="toggle-btn inactive" id="pushNotif" onclick="toggleButton(this)">Disabled</button>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h4>Course Reminders</h4>
+                            <p>Remind me about upcoming deadlines and assignments</p>
+                        </div>
+                        <button class="toggle-btn active" id="courseReminders" onclick="toggleButton(this)">Enabled</button>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h4>Weekly Progress Report</h4>
+                            <p>Receive a weekly summary of your learning progress</p>
+                        </div>
+                        <button class="toggle-btn active" id="progressReport" onclick="toggleButton(this)">Enabled</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appearance Settings -->
+            <div class="settings-category">
+                <div class="category-header">
+                    <span class="category-icon">🎨</span>
+                    <h3>Appearance</h3>
+                </div>
+                <div class="settings-section">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h4>Theme</h4>
+                            <p>Choose your preferred color theme</p>
+                        </div>
+                        <select class="select-input" id="themeSelect">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                            <option value="auto">Auto</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h4>Language</h4>
+                            <p>Select your preferred language</p>
+                        </div>
+                        <select class="select-input" id="languageSelect">
+                            <option value="en">English</option>
+                            <option value="es">Spanish</option>
+                            <option value="fr">French</option>
+                            <option value="de">German</option>
+                            <option value="hi">Hindi</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h4>Font Size</h4>
+                            <p>Adjust the text size for better readability</p>
+                        </div>
+                        <select class="select-input" id="fontSizeSelect">
+                            <option value="small">Small</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="large">Large</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Privacy Settings -->
+            <div class="settings-category">
+                <div class="category-header">
+                    <span class="category-icon">🔒</span>
+                    <h3>Privacy & Security</h3>
+                </div>
+                <div class="settings-section">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h4>Profile Visibility</h4>
+                            <p>Control who can see your profile information</p>
+                        </div>
+                        <select class="select-input" id="profileVisibility">
+                            <option value="public">Public</option>
+                            <option value="friends">Friends Only</option>
+                            <option value="private" selected>Private</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h4>Two-Factor Authentication</h4>
+                            <p>Add an extra layer of security to your account</p>
+                        </div>
+                        <button class="toggle-btn inactive" id="twoFactor" onclick="toggleButton(this)">Disabled</button>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h4>Data Sharing</h4>
+                            <p>Share anonymous usage data to improve services</p>
+                        </div>
+                        <button class="toggle-btn active" id="dataSharing" onclick="toggleButton(this)">Enabled</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Management -->
+            <div class="settings-category">
+                <div class="category-header">
+                    <span class="category-icon">⚙️</span>
+                    <h3>Account Management</h3>
+                </div>
+                <div class="account-section">
+                    <div class="account-card">
+                        <h4>Change Password</h4>
+                        <p>Update your password to keep your account secure</p>
+                        <button class="account-btn" onclick="changePassword()">Change Password</button>
+                    </div>
+                    <div class="account-card">
+                        <h4>Update Email</h4>
+                        <p>Change the email address associated with your account</p>
+                        <button class="account-btn" onclick="updateEmail()">Update Email</button>
+                    </div>
+                    <div class="account-card">
+                        <h4>Export Data</h4>
+                        <p>Download a copy of your personal data and courses</p>
+                        <button class="account-btn" onclick="exportData()">Export Data</button>
+                    </div>
+                    <div class="account-card">
+                        <h4>Delete Account</h4>
+                        <p>Permanently delete your account and all data</p>
+                        <button class="account-btn danger-btn" onclick="deleteAccount()">Delete Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleButton(button) {
+            if (button.classList.contains('active')) {
+                button.classList.remove('active');
+                button.classList.add('inactive');
+                button.textContent = 'Disabled';
+            } else {
+                button.classList.remove('inactive');
+                button.classList.add('active');
+                button.textContent = 'Enabled';
+            }
+            
+            // Save settings to memory
+            saveSettings();
+        }
+
+        function saveSettings() {
+            const settings = {
+                emailNotif: document.getElementById('emailNotif').classList.contains('active'),
+                pushNotif: document.getElementById('pushNotif').classList.contains('active'),
+                courseReminders: document.getElementById('courseReminders').classList.contains('active'),
+                progressReport: document.getElementById('progressReport').classList.contains('active'),
+                theme: document.getElementById('themeSelect').value,
+                language: document.getElementById('languageSelect').value,
+                fontSize: document.getElementById('fontSizeSelect').value,
+                profileVisibility: document.getElementById('profileVisibility').value,
+                twoFactor: document.getElementById('twoFactor').classList.contains('active'),
+                dataSharing: document.getElementById('dataSharing').classList.contains('active')
+            };
+            
+            localStorage.setItem('userSettings', JSON.stringify(settings));
+        }
+
+        function loadSettings() {
+            const settings = JSON.parse(localStorage.getItem('userSettings'));
+            
+            if (settings) {
+                // Load toggle buttons
+                updateToggle('emailNotif', settings.emailNotif);
+                updateToggle('pushNotif', settings.pushNotif);
+                updateToggle('courseReminders', settings.courseReminders);
+                updateToggle('progressReport', settings.progressReport);
+                updateToggle('twoFactor', settings.twoFactor);
+                updateToggle('dataSharing', settings.dataSharing);
+                
+                // Load dropdowns
+                document.getElementById('themeSelect').value = settings.theme;
+                document.getElementById('languageSelect').value = settings.language;
+                document.getElementById('fontSizeSelect').value = settings.fontSize;
+                document.getElementById('profileVisibility').value = settings.profileVisibility;
+            }
+        }
+
+        function updateToggle(id, isActive) {
+            const button = document.getElementById(id);
+            if (isActive) {
+                button.classList.add('active');
+                button.classList.remove('inactive');
+                button.textContent = 'Enabled';
+            } else {
+                button.classList.remove('active');
+                button.classList.add('inactive');
+                button.textContent = 'Disabled';
+            }
+        }
+
+        // Save settings when dropdowns change
+        document.querySelectorAll('.select-input').forEach(select => {
+            select.addEventListener('change', saveSettings);
+        });
+
+        function changePassword() {
+            const newPassword = prompt('Enter your new password:');
+            if (newPassword && newPassword.length >= 6) {
+                alert('Password changed successfully!');
+            } else if (newPassword) {
+                alert('Password must be at least 6 characters long.');
+            }
+        }
+
+        function updateEmail() {
+            const newEmail = prompt('Enter your new email address:');
+            if (newEmail && newEmail.includes('@')) {
+                alert('Email updated successfully! A verification link has been sent.');
+            } else if (newEmail) {
+                alert('Please enter a valid email address.');
+            }
+        }
+
+        function exportData() {
+            alert('Your data export has been initiated. You will receive a download link via email shortly.');
+        }
+
+        function deleteAccount() {
+            const confirmation = confirm('Are you sure you want to delete your account? This action cannot be undone.');
+            if (confirmation) {
+                const finalConfirm = prompt('Type "DELETE" to confirm account deletion:');
+                if (finalConfirm === 'DELETE') {
+                    alert('Your account has been scheduled for deletion. You have 30 days to cancel this action.');
+                    // In real app: handle account deletion
+                }
+            }
+        }
+
+        function navigateToProfile(e) {
+            e.preventDefault();
+            alert('Navigate to Profile page');
+        }
+
+        function navigateToCourses(e) {
+            e.preventDefault();
+            alert('Navigate to My Courses page');
+        }
+
+        function navigateToProgress(e) {
+            e.preventDefault();
+            alert('Navigate to Progress page');
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            if (confirm("Are you sure you want to logout?")) {
+                localStorage.removeItem('currentUser');
+                alert("Logged out successfully!");
+            }
+        });
+
+        // Load settings on page load
+        loadSettings();
+    </script>
+
+</body>
+</html>
