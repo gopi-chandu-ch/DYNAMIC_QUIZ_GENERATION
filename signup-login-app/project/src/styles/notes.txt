@@ -1,0 +1,184 @@
+/* Full-page background & centering */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #00c6ff 0%, #007a5c 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 500px;
+}
+
+/* Navbar styling */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links button {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-links button:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Dashboard box centered on screen */
+.dashboard {
+  background: rgba(255, 255, 255, 0.85);
+  margin: 3rem auto;
+  padding: 2.5rem;
+  border-radius: 25px;
+  width: 90%;
+  max-width: 950px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Title */
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #00694d;
+  font-size: 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Grid for course cards */
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  justify-items: center;
+  
+  
+}
+
+/* Each card styling */
+.course-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.course-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(0, 198, 255, 0.3);
+}
+
+.course-card h4 {
+  color: #007a5c;
+  margin-bottom: 0.6rem;
+  font-size: 1.2rem;
+}
+
+.course-card p {
+  font-size: 0.9rem;
+  color: #555;
+  min-height: 50px;
+}
+
+.course-card button {
+  background: linear-gradient(135deg, #00c6ff 0%, #007a5c 100%);
+  border: none;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.course-card button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 198, 255, 0.5);
+}
+
+/* Empty message */
+.empty {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .dashboard {
+    margin-top: 6rem;
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  .course-card {
+    max-width: 100%;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .nav-links button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+// styles for coursepage.jsx
